@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+{% block individual_css %}
+  <link rel="stylesheet" href="{% static 'css/dashboard.css' %}" />
+{% endblock %}
+
+{% block content %}
+  <h2>{{ title }}</h2>
+  <form class="col-sm-6" method="post">
+    {% csrf_token %}
+    {% for field in form %}
+      <div class="form-group">
+        {{ field.label_tag }} {{ field }}
+        <small class="form-text text-muted">{{ field.errors }}</small>
+      </div>
+    {% endfor %}
+    <button class="btn btn-outline-primary" type="submit">Salvar</button>
+  </form>
+  {% if messages %}
+    {% load bootstrap_type_messages %}
+    <div class="col-sm-6">
+      {% for message in messages %}
+        <div class="alert {{ message|message_type }}" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endblock %}

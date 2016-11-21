@@ -6,5 +6,17 @@
 {% endblock %}
 
 {% block content %}
-  <h1>Minha conta</h1>
+  <h2>Minha conta</h2>
+
+  <ul class="list-group col-sm-5">
+    <li class="list-group-item">Nome de usuário: <b>{{ request.user.get_username }}</b></li>
+    <li class="list-group-item">Nome completo: <b>{{ request.user.get_full_name }}</b></li>
+    <li class="list-group-item">Email: <b>{{ request.user.email }}</b></li>
+    <li class="list-group-item">
+      {% load bootstrap_account_type %}
+      Tipo de conta: <span class="tag tag-default">{{ request.user|account_type }}</span>
+    </li>
+  </ul>
+
+  <a class="btn btn-outline-primary" href="{% url 'cms_show_edit_usuario' request.user.id %}" role="button">Editar meus dados</a>
 {% endblock %}

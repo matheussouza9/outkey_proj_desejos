@@ -6,26 +6,28 @@
 {% endblock %}
 
 {% block content %}
-  <h2>Desejos</h2>
+  <h2>Usuários</h2>
     <div class="table-responsive">
       <table class="table table-sm">
         <thead>
           <tr>
             <th>#</th>
-            <th>Descrição</th>
-            <th>Dono</th>
+            <th>Nome de usuário</th>
+            <th>Email</th>
+            <th>Tipo de conta</th>
             <th>Ações</th>
           </tr>
         </thead>
         <tbody>
-          {% load bootstrap_table_admin_meu_desejo %}
-          {% for desejo in desejos %}
-            <tr class="{{ request.user|admin_meus_desejos:desejo }}">
-              <td>{{ desejo.id }}</td>
-              <td>{{ desejo.descricao }}</td>
-              <td>{{ desejo.dono }}</td>
+          {% load bootstrap_account_type %}
+          {% for usuario in usuarios %}
+            <tr>
+              <td>{{ usuario.id }}</td>
+              <td>{{ usuario.username }}</td>
+              <td>{{ usuario.email }}</td>
+              <td><span class="tag tag-default">{{ usuario|account_type }}</span></td>
               <td>
-                <a class="btn btn-outline-warning btn-sm" href="{% url 'cms_show_edit_usuario' desejo.id %}" role="button">Editar</a>
+                <a class="btn btn-outline-warning btn-sm" href="{% url 'cms_show_edit_usuario' usuario.id %}" role="button">Editar</a>
                 <a class="btn btn-outline-danger btn-sm" href="#" role="button">Excluir</a>
               </td>
             </tr>
@@ -35,5 +37,5 @@
         </tbody>
       </table>
     </div>
-  <a class="btn btn-outline-primary" href="#" role="button">Adicionar desejo</a>
+  <a class="btn btn-outline-primary" href="#" role="button">Adicionar usuário</a>
 {% endblock %}
