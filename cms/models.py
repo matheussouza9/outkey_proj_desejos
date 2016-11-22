@@ -10,4 +10,4 @@ class Desejo(models.Model):
         return reverse('cms:cms_show_desejo', kwargs={'pk': self.pk})
 
     def __unicode__(self):
-        return "ID %s - %s - %s" %(self.id, self.dono.username, self.descricao)
+        return "#%s | Dono: %s |Descricao: %s" %(self.id, self.dono.username, self.descricao)
