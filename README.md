@@ -13,3 +13,18 @@ Para instalar as dependências(necessário o gerenciador de pacotes `pip`):
 $ cd outkey_proj
 $ pip install -r requirements.txt
 ```
+
+### Observações
+Você deve relacionar os models do projeto com o banco de dados, para isso, realize as migrações e aplique-as:
+
+```sh
+$ cd outkey_proj
+$ python manage.py makemigrations
+$ python manage.py migrate
+```
+Você deve criar um superusuário:
+
+```sh
+$ cd outkey_proj
+$ python manage.py createsuperuser
+```
