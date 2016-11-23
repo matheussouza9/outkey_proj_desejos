@@ -16,3 +16,16 @@ class IsSuperuserOrBasicForUser(permissions.BasePermission):
             return user == request.user
 
         return True
+
+class IsSuperuserOrBasicForDesejo(permissions.BasePermission):
+    # message = 'lorem ipsum'
+
+    def has_permission(self, request, view):
+        return True
+
+    def has_object_permission(self, request, view, desejo):
+        # se nao for super usuario, so deixa manipular os proprios desejos
+        if not request.user.is_superuser:
+            return desejo.dono == request.user
+
+        return True

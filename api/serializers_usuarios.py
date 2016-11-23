@@ -6,7 +6,7 @@ class UserSerializer(HyperlinkedModelSerializer):
         model = User
         fields = ('url', 'id', 'username', 'first_name', 'last_name', 'email', 'password',  'is_active', 'is_superuser')
         extra_kwargs = {
-            'url': {'view_name': 'api_retrieve_usuario', 'lookup_field': 'pk'},
+            'url': {'view_name': 'api_retrieve_update_destroy_usuario', 'lookup_field': 'pk'},
             'password': {'write_only': True},
         }
 

@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
-from api.serializers import UserSerializer, RestrictedUserSerializer
+from api.serializers_usuarios import UserSerializer, RestrictedUserSerializer
 
 class UserListCreateApiView(APIView):
     permission_classes = (IsAuthenticated, IsSuperuserOrBasicForUser,)
@@ -16,8 +16,8 @@ class UserListCreateApiView(APIView):
             # se passar a variavel request para o context, a url para o recurso passa de relativa para absoluta
             serializer = UserSerializer(usuarios, many=True, context={'request': request})
         else:
-            usuarios = User.objects.filter(pk=request.user.id)
-            serializer = RestrictedUserSerializer(usuarios, many=True, context={'request': request})
+            usuario = User.objects.get(pk=request.user.id)
+            serializer = RestrictedUserSerializer(usuario, context={'request': request})
 
         return Response(serializer.data)
 
@@ -30,7 +30,7 @@ class UserListCreateApiView(APIView):
 
         return Response(serializer.error_messages)
 
-class UserRetriveUpdateDestroyApiView(APIView):
+class UserRetrieveUpdateDestroyApiView(APIView):
     permission_classes = (IsAuthenticated, IsSuperuserOrBasicForUser,)
 
     def get(self, request, pk, *args, **kwargs):
